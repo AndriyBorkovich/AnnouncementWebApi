@@ -26,9 +26,11 @@ form {
     margin-bottom: 20px;
 }
 
+/* Inputs */
 input[type="text"],
 input[type="datetime"] {
-    width: 80%;
+    display: block;
+    width: 40%;
     padding: 10px;
     margin-bottom: 10px;
     border-radius: 5px;
@@ -36,6 +38,7 @@ input[type="datetime"] {
 }
 
 input[type="submit"] {
+    display: block;
     padding: 10px 20px;
     background-color: #4CAF50;
     color: #fff;
@@ -67,15 +70,15 @@ th {
     margin-bottom: 20px;
 }
 
-    #editForm input[type="checkbox"] {
-        margin-right: 5px;
-    }
+#editForm input[type="checkbox"] {
+    margin-right: 5px;
+}
 
-    #editForm a {
-        color: #999;
-        text-decoration: none;
-        cursor: pointer;
-    }
+#editForm a {
+   color: #999;
+   text-decoration: none;
+   cursor: pointer;
+}
 
 /* Counter */
 #counter {

@@ -11,7 +11,7 @@
     <form id="add-form" action="javascript:void(0);" method="POST">
         <input type="text" id="add-title" placeholder="Enter title">
         <input type="text" id="add-description" placeholder="Enter description">
-        <input type="datetime" id="add-date" >
+        <input type="datetime" id="add-date" placeholder="Enter date (YYY-MM-DD HH:MM:SS)">
         <input type="submit" value="Add">
     </form>
 
@@ -19,7 +19,7 @@
         <h3>Edit</h3>
         <form id="edit-form" action="javascript:void(0);">
             <input type="hidden" id="edit-id">
-            <input type="checkbox" id="edit-title">
+            <input type="text" id="edit-title">
             <input type="text" id="edit-description">
             <input type="datetime" id="edit-date">
             <input type="submit" value="Save">
@@ -28,7 +28,6 @@
     </div>
 
     <p id="counter"></p>
-
     <table>
         <tr>
             <th>Title</th>

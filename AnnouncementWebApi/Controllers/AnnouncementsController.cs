@@ -51,7 +51,6 @@ namespace AnnouncementWebApi.Controllers
         }
 
         // PUT: api/Announcements/5
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
         public async Task<IActionResult> PutAnnouncement(int id, Announcement announcement)
         {
@@ -81,37 +80,37 @@ namespace AnnouncementWebApi.Controllers
             return NoContent();
         }
 
-        [HttpGet("top3")]
-        public async Task<ActionResult<IEnumerable<Announcement>>> GetTopThreeAnnouncements()
+        // GET: api/Announcements/top3/id
+        [HttpGet("top3/{id}")]
+        public async Task<ActionResult<IEnumerable<Announcement>>> GetTopThreeSimilarAnnouncements(int id)
         {
+            var selectedAnnouncement = await _context.Announcements.FindAsync(id);
+
+            if (selectedAnnouncement == null)
+            {
+                return NotFound(); 
+            }
+
             var announcements = await _context.Announcements.ToListAsync();
 
             // Filter announcements based on similarity
-            var similarAnnouncements = FindSimilarAnnouncements(announcements);
-            
-            // select top 3
+            var similarAnnouncements = FindSimilarAnnouncements(selectedAnnouncement, announcements);
+
+            // Select top 3
             var sortedAnnouncements = similarAnnouncements.Take(3);
 
             return Ok(sortedAnnouncements);
         }
 
-        private IEnumerable<Announcement> FindSimilarAnnouncements(IEnumerable<Announcement> announcements)
+        private IEnumerable<Announcement> FindSimilarAnnouncements(Announcement selectedAnnouncement, IEnumerable<Announcement> announcements)
         {
-            var similarAnnouncements = new List<Announcement>();
 
-            foreach (var announcement in announcements)
-            {
-                // Check if there are any other announcements that share at least one word in title or description
-                var similar = announcements.Any(a =>
-                    a.Id != announcement.Id &&
-                    (a.Title.Split(' ', StringSplitOptions.RemoveEmptyEntries).Intersect(announcement.Title.Split(' ')).Any() ||
-                    a.Description.Split(' ', StringSplitOptions.RemoveEmptyEntries).Intersect(announcement.Description.Split(' ')).Any()));
-
-                if (similar)
-                {
-                    similarAnnouncements.Add(announcement);
-                }
-            }
+            // Check if there are any other announcements that share at least one word in title or description
+            var similarAnnouncements = announcements.Where(a =>
+                a.Id != selectedAnnouncement.Id &&
+                (a.Title.Split(' ', StringSplitOptions.RemoveEmptyEntries).Intersect(selectedAnnouncement.Title.Split(' ')).Any() ||
+                a.Description.Split(' ', StringSplitOptions.RemoveEmptyEntries).Intersect(selectedAnnouncement.Description.Split(' ')).Any()))
+                .ToList();
 
             return similarAnnouncements;
         }
@@ -131,7 +130,7 @@ namespace AnnouncementWebApi.Controllers
             return CreatedAtAction(nameof(GetAnnouncement), new { id = announcement.Id }, announcement);
         }
 
-        // DELETE
+        // DELETE api/announcements/5
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteAnnouncement(int id)
         {
