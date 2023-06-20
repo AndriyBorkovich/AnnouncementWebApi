@@ -1,0 +1,85 @@
+﻿body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f2f2f2;
+}
+
+/* Page Container */
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* Headings */
+h1 {
+    color: #333;
+}
+
+h3 {
+    color: #666;
+}
+
+/* Form */
+form {
+    margin-bottom: 20px;
+}
+
+input[type="text"],
+input[type="datetime"] {
+    width: 80%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+input[type="submit"] {
+    padding: 10px 20px;
+    background-color: #4CAF50;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+/* Table */
+table {
+    width: 80%;
+    border-collapse: collapse;
+}
+
+th, td {
+    padding: 10px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+th {
+    background-color: #f2f2f2;
+    font-weight: bold;
+}
+
+/* Edit Form */
+#editForm {
+    display: none;
+    margin-bottom: 20px;
+}
+
+    #editForm input[type="checkbox"] {
+        margin-right: 5px;
+    }
+
+    #editForm a {
+        color: #999;
+        text-decoration: none;
+        cursor: pointer;
+    }
+
+/* Counter */
+#counter {
+    color: #999;
+    font-style: italic;
+    margin-bottom: 10px;
+}
